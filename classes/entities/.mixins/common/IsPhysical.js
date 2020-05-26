@@ -1,6 +1,8 @@
+// IsPhysical:
+
 import Phaser from "phaser";
 
-class IsInFront {
+class IsPhysical {
   constructor() {
     var attributes = {};
 
@@ -9,12 +11,12 @@ class IsInFront {
   }
 }
 
-IsInFront.methods = {
+IsPhysical.methods = {
   // Called when an entity with this mixin is spawned into a visible scene
-  _onRender() {
-    console.log("putting dialog in front");
-    this.setDepth(99999);
+  _onInit() {
+    // Add to physics engine
+    this.scene.physics.add.existing(this);
   }
 };
 
-export default IsInFront;
+export default IsPhysical;

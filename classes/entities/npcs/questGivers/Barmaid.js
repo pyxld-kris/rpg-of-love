@@ -10,7 +10,7 @@ export default class Barmaid extends NPC {
   }
 
   // Fires after all mixins attached to this entity have been initialized
-  init() {
+  onInit() {
     this.setRole("Barmaid");
     this.assignRandomGender(["female"]);
     this.populateAge(16, 40);
@@ -24,6 +24,6 @@ export default class Barmaid extends NPC {
       this.scene.sound.play("barmaid", { volume: 0.25 });
     }, 500);
 
-    super.init();
+    super.onInit();
   }
 }

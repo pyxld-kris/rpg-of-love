@@ -3,7 +3,8 @@ import Phaser from "phaser";
 class HasSkills {
   constructor() {
     var attributes = {
-      skills: []
+      skills: [],
+      skillDisplay: null
     };
 
     Object.assign(this, attributes);
@@ -12,8 +13,22 @@ class HasSkills {
 }
 
 HasSkills.methods = {
-  // Called when an entity with this mixin is created
-  _init() {},
+  // Called when an entity with this mixin is spawned into a visible scene
+  _onRender() {
+    /*
+    this.skillDisplay = this.scene.add
+    .bitmapText(
+      x - width / 2,
+      y,
+      "teeny-tiny-pixls",
+      "",
+      5,
+      Phaser.GameObjects.BitmapText.ALIGN_LEFT // 1=middle algned text
+    )
+    .setOrigin(0, 0)
+    .setMaxWidth(width);
+    */
+  },
 
   // <Getters>
   getSkills() {
@@ -89,74 +104,106 @@ export default HasSkills;
 /*
  *Holds a dictionary of all of our possible skills
  */
+
 const skillTypes = [
-  { skillType: "Acrobatics", difficulty: 1 },
-  { skillType: "Alchemy", difficulty: 1 },
-  { skillType: "Animal Call", difficulty: 1 },
-  { skillType: "Astrology", difficulty: 1 },
-  { skillType: "Armorer", difficulty: 1 },
-  { skillType: "Artistry", difficulty: 1 },
-  { skillType: "Barter", difficulty: 1 },
-  { skillType: "Blackmail", difficulty: 1 },
-  { skillType: "Blacksmith", difficulty: 1 },
-  { skillType: "Bluff", difficulty: 1 },
-  { skillType: "Boating", difficulty: 1 },
-  { skillType: "Brewing", difficulty: 1 },
-  { skillType: "Bribe", difficulty: 1 },
-  { skillType: "Camping", difficulty: 1 },
-  { skillType: "Cartography", difficulty: 1 },
-  { skillType: "Cooking", difficulty: 1 },
-  { skillType: "Dancing", difficulty: 1 },
-  { skillType: "Deceit", difficulty: 1 },
-  { skillType: "Diplomacy", difficulty: 1 },
-  { skillType: "Disguise", difficulty: 1 },
-  { skillType: "Empathy", difficulty: 1 },
-  { skillType: "Enchanting", difficulty: 1 },
-  { skillType: "Engineering", difficulty: 1 },
-  { skillType: "Etiquette", difficulty: 1 },
-  { skillType: "Farming", difficulty: 1 },
-  { skillType: "First Aid", difficulty: 1 },
-  { skillType: "Fishing", difficulty: 1 },
-  { skillType: "Flirting", difficulty: 1 },
-  { skillType: "Folklore", difficulty: 1 },
-  { skillType: "Fortune Telling", difficulty: 1 },
-  { skillType: "Gambling", difficulty: 1 },
-  { skillType: "Haggling", difficulty: 1 },
-  { skillType: "Healing", difficulty: 1 },
-  { skillType: "Hunting", difficulty: 1 },
-  { skillType: "Intimidation", difficulty: 1 },
-  { skillType: "Investigation", difficulty: 1 },
-  { skillType: "Language", difficulty: 1 },
-  { skillType: "Literacy", difficulty: 1 },
-  { skillType: "Marksman", difficulty: 1 },
-  { skillType: "Merchant", difficulty: 1 },
-  { skillType: "Mining", difficulty: 1 },
-  { skillType: "Mountaineering", difficulty: 1 },
-  { skillType: "Mythology", difficulty: 1 },
-  { skillType: "Pickpocket", difficulty: 1 },
-  { skillType: "Public Speaking", difficulty: 1 },
-  { skillType: "Scribe", difficulty: 1 },
-  { skillType: "Sculpting", difficulty: 1 },
-  { skillType: "Seamanship", difficulty: 1 },
-  { skillType: "Seduction", difficulty: 1 },
-  { skillType: "Sewing", difficulty: 1 },
-  { skillType: "Slight of Hand", difficulty: 1 },
-  { skillType: "Spell Craft", difficulty: 1 },
-  { skillType: "Soldiering", difficulty: 1 },
-  { skillType: "Spelunking", difficulty: 1 },
-  { skillType: "Stealth", difficulty: 1 },
-  { skillType: "Streetwise", difficulty: 1 },
-  { skillType: "Stonemasonry", difficulty: 1 },
-  { skillType: "Storytelling", difficulty: 1 },
-  { skillType: "Survival", difficulty: 1 },
-  { skillType: "Swimming", difficulty: 1 },
-  { skillType: "Tailor", difficulty: 1 },
-  { skillType: "Teaching", difficulty: 1 },
-  { skillType: "Tracking", difficulty: 1 },
-  { skillType: "Trapping", difficulty: 1 },
-  { skillType: "Unarmed Combat", difficulty: 1 },
-  { skillType: "Weapons Master", difficulty: 1 },
-  { skillType: "Weapon Smithing", difficulty: 1 },
-  { skillType: "Weaving", difficulty: 1 },
-  { skillType: "Woodworking", difficulty: 1 }
+  {
+    skillType: "*",
+    difficulty: 1
+  },
+  {
+    skillType: "Alchemy",
+    difficulty: 1
+  },
+  {
+    skillType: "Animals",
+    difficulty: 1
+  },
+  {
+    skillType: "Artistry",
+    difficulty: 1
+  },
+  {
+    skillType: "Blacksmithing",
+    difficulty: 1
+  },
+  {
+    skillType: "Combat",
+    difficulty: 1
+  },
+  {
+    skillType: "Cooking",
+    difficulty: 1
+  },
+  {
+    skillType: "Dancing",
+    difficulty: 1
+  },
+  {
+    skillType: "Deceit",
+    difficulty: 1
+  },
+  {
+    skillType: "Farming",
+    difficulty: 1
+  },
+  {
+    skillType: "Fishing",
+    difficulty: 1
+  },
+  {
+    skillType: "Fortune Telling",
+    difficulty: 1
+  },
+  {
+    skillType: "Intelligence",
+    difficulty: 1
+  },
+  {
+    skillType: "Intimidation",
+    difficulty: 1
+  },
+  {
+    skillType: "Magic",
+    difficulty: 1
+  },
+  {
+    skillType: "Mercantilism",
+    difficulty: 1
+  },
+  {
+    skillType: "Performance",
+    difficulty: 1
+  },
+  {
+    skillType: "Thievery",
+    difficulty: 1
+  },
+  {
+    skillType: "Seamanship",
+    difficulty: 1
+  },
+  {
+    skillType: "Seduction",
+    difficulty: 1
+  },
+  {
+    skillType: "Street Savviness",
+    difficulty: 1
+  },
+  {
+    skillType: "Storytelling",
+    difficulty: 1
+  },
+  {
+    skillType: "Woodsmanship",
+    difficulty: 1
+  },
+  {
+    skillType: "Arrogance",
+    difficulty: 1
+  },
+  {
+    skillType: "Fashion",
+    difficulty: 1
+  }
 ];

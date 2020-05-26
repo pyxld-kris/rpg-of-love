@@ -12,8 +12,8 @@ class FillsEntireScreen {
 }
 
 FillsEntireScreen.methods = {
-  // Called when an entity with this mixin is created
-  _init() {
+  // Called when an entity with this mixin is spawned into a visible scene
+  _onRender() {
     let gameWidth = this.scene.game.config.width;
     let gameHeight = this.scene.game.config.height;
     this.setSize(gameWidth, gameHeight);

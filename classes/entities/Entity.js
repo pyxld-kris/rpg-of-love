@@ -11,7 +11,7 @@ export default class Entity extends Phaser.GameObjects.Sprite {
 
     // Apply our mixin components to this instance, and store for cleanup
     this.mixins = [...MIXINS, ...extraMixins];
-    this.mixins.forEach(component => {
+    this.forEachMixin(component => {
       // Error reporting
       if (!component) {
         console.error("Bad Mixin");
@@ -25,21 +25,27 @@ export default class Entity extends Phaser.GameObjects.Sprite {
     scene.events.on("update", this.update, this);
   }
 
+  forEachMixin(func) {
+    this.mixins.forEach(func);
+  }
+  fireMixinEvents(eventName) {
+    // Takes extra arguments/ which are passed into the supplied function specified by eventName
+    this.forEachMixin(mixin => {
+      if (mixin.methods[eventName])
+        mixin.methods[eventName].call(this, arguments[1], arguments[2]);
+    });
+  }
+
   update(time, delta) {
-    // Call the _init method of each of this entity's components, if it exists
+    // Call the _onInit method of each of this entity's components, if it exists
     if (!this.isInitialized) {
-      this.mixins.forEach(component => {
-        if (component.methods._init) component.methods._init.call(this);
-      });
-      if (this.init) this.init();
+      this.fireMixinEvents("_onInit");
+      if (this.onInit) this.onInit();
       this.isInitialized = true;
     }
 
-    // Call the update() method of each of this entity's components, if it exists
-    this.mixins.forEach(component => {
-      if (component.methods._update)
-        component.methods._update.call(this, time, delta);
-    });
+    // Call the _onUpdate() method of each of this entity's components, if it exists
+    this.fireMixinEvents("_onUpdate", time, delta);
 
     super.update(time, delta);
   }
@@ -55,10 +61,8 @@ export default class Entity extends Phaser.GameObjects.Sprite {
       if (!member.isDestroyed) member.destroy();
     });
 
-    // Call the _destroy method of each of this entity's components, if it exists
-    this.mixins.forEach(component => {
-      if (component.methods._destroy) component.methods._destroy.call(this);
-    });
+    // Call the _onDerender method of each of this entity's components, if it exists
+    this.fireMixinEvents("_onDerender");
 
     super.destroy();
   }

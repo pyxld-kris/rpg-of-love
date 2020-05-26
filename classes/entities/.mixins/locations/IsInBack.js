@@ -10,8 +10,8 @@ class IsInBack {
 }
 
 IsInBack.methods = {
-  // Called when an entity with this mixin is created
-  _init() {
+  // Called when an entity with this mixin is spawned into a visible scene
+  _onRender() {
     this.setDepth(-2);
     this.forEachMember(member => {
       member.setDepth(-2);

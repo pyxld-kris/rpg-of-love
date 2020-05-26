@@ -10,7 +10,7 @@ export default class GlassesGirl extends NPC {
   }
 
   // Fires after all mixins attached to this entity have been initialized
-  init() {
+  onInit() {
     this.setRole("Girl");
     this.assignRandomGender(["female"]);
     this.populateAge(18, 25);
@@ -19,6 +19,6 @@ export default class GlassesGirl extends NPC {
       this.scene.sound.play("glassesGirl", { volume: 0.25 });
     }, 500);
 
-    super.init();
+    super.onInit();
   }
 }

@@ -10,7 +10,7 @@ export default class Drunk extends NPC {
   }
 
   // Fires after all mixins attached to this entity have been initialized
-  init() {
+  onInit() {
     this.setRole("Drunk");
     this.assignRandomGender(["male"]);
     this.populateAge(30, 50);
@@ -19,6 +19,6 @@ export default class Drunk extends NPC {
       this.scene.sound.play("drunk", { volume: 0.25 });
     }, 500);
 
-    super.init();
+    super.onInit();
   }
 }

@@ -10,7 +10,7 @@ export default class Blacksmith extends NPC {
   }
 
   // Fires after all mixins attached to this entity have been initialized
-  init() {
+  onInit() {
     this.setRole("Blacksmith");
     this.assignRandomGender(["male"]);
     this.populateAge(40, 60);
@@ -25,6 +25,6 @@ export default class Blacksmith extends NPC {
       this.scene.sound.play("blacksmith", { volume: 0.25 });
     }, 500);
 
-    super.init();
+    super.onInit();
   }
 }

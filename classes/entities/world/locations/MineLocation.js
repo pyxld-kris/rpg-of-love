@@ -1,21 +1,18 @@
 import Phaser from "phaser";
-import VisibleEntity from "../../VisibleEntity.js";
-
 import Mixins from "../../.mixins";
+import Location from "../Location.js";
 
-export default class MineLocation extends VisibleEntity {
+export default class MineLocation extends Location {
   constructor(scene) {
-    const MIXINS = [
-      Mixins.FillsEntireScreen,
-      Mixins.IsInBack,
-      Mixins.HasFireParticles
-    ];
+    const MIXINS = [Mixins.HasFireParticles];
 
     super(MIXINS, scene, 0, 0, "mine");
   }
 
   // Fires after all mixins attached to this entity have been initialized
-  init() {
+  onInit() {}
+
+  onRender() {
     this.initFireParticles(100, 30);
   }
 }

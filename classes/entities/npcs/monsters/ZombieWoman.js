@@ -10,7 +10,7 @@ export default class ZombieWoman extends NPC {
   }
 
   // Fires after all mixins attached to this entity have been initialized
-  init() {
+  onInit() {
     this.setRole("Zombie Woman");
     this.assignRandomGender(["female"]);
 
@@ -23,6 +23,6 @@ export default class ZombieWoman extends NPC {
       this.scene.sound.play("zombieWoman", { volume: 0.25 });
     }, 500);
 
-    super.init();
+    super.onInit();
   }
 }

@@ -10,7 +10,7 @@ export default class DwarfInnkeeper extends NPC {
   }
 
   // Fires after all mixins attached to this entity have been initialized
-  init() {
+  onInit() {
     this.setRole("Dwarven Innkeeper");
     this.assignRandomGender(["male"]);
     this.populateAge(35, 60);
@@ -19,6 +19,6 @@ export default class DwarfInnkeeper extends NPC {
       this.scene.sound.play("dwarfInnkeeper", { volume: 0.25 });
     }, 500);
 
-    super.init();
+    super.onInit();
   }
 }

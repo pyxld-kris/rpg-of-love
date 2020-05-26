@@ -10,7 +10,7 @@ export default class WarriorGirl extends NPC {
   }
 
   // Fires after all mixins attached to this entity have been initialized
-  init() {
+  onInit() {
     this.setRole("Warrior Girl");
     this.assignRandomGender(["female"]);
     this.populateAge(16, 35);
@@ -19,6 +19,6 @@ export default class WarriorGirl extends NPC {
       this.scene.sound.play("warriorGirl", { volume: 0.25 });
     }, 500);
 
-    super.init();
+    super.onInit();
   }
 }

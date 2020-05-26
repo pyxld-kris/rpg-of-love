@@ -10,7 +10,7 @@ export default class OldLady extends NPC {
   }
 
   // Fires after all mixins attached to this entity have been initialized
-  init() {
+  onInit() {
     this.setRole("Old Lady");
     this.assignRandomGender(["female"]);
     this.populateAge(55, 80);
@@ -19,6 +19,6 @@ export default class OldLady extends NPC {
       this.scene.sound.play("oldLady", { volume: 0.25 });
     }, 500);
 
-    super.init();
+    super.onInit();
   }
 }

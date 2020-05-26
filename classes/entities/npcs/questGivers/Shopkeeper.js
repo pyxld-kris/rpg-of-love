@@ -10,7 +10,7 @@ export default class Shopkeeper extends NPC {
   }
 
   // Fires after all mixins attached to this entity have been initialized
-  init() {
+  onInit() {
     this.setRole("Shopkeeper");
     this.assignRandomGender(["male"]);
     this.populateAge(25, 40);
@@ -19,6 +19,6 @@ export default class Shopkeeper extends NPC {
       this.scene.sound.play("shopkeeper", { volume: 0.25 });
     }, 500);
 
-    super.init();
+    super.onInit();
   }
 }

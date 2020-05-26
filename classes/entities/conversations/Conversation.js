@@ -9,7 +9,7 @@ export default class Conversation extends Entity {
     const MIXINS = [];
 
     super(MIXINS, scene);
-
+    console.log(dialogMessages);
     this.currentDialogBox = null;
     this.participants = participants;
     this.dialogMessages = dialogMessages;
@@ -27,7 +27,7 @@ export default class Conversation extends Entity {
   }
 
   // Fires after all mixins attached to this entity have been initialized
-  init() {
+  onInit() {
     this.nextDialogBox();
   }
 
@@ -39,6 +39,7 @@ export default class Conversation extends Entity {
       speaker.getName() + " the " + speaker.getRole(),
       this.dialogMessages.getRandomEntry()
     );
+    this.currentDialogBox.render();
   }
 
   destroy() {

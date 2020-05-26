@@ -10,7 +10,7 @@ export default class Priest extends NPC {
   }
 
   // Fires after all mixins attached to this entity have been initialized
-  init() {
+  onInit() {
     this.setRole("Priest");
     this.assignRandomGender(["male"]);
     this.populateAge(50, 80);
@@ -19,6 +19,6 @@ export default class Priest extends NPC {
       this.scene.sound.play("priest", { volume: 0.25 });
     }, 500);
 
-    super.init();
+    super.onInit();
   }
 }

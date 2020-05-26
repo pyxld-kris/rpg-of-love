@@ -10,7 +10,7 @@ export default class Rat extends NPC {
   }
 
   // Fires after all mixins attached to this entity have been initialized
-  init() {
+  onInit() {
     this.setRole("Rat");
     this.assignRandomGender(["male", "female"]);
 
@@ -18,6 +18,6 @@ export default class Rat extends NPC {
       this.scene.sound.play("rat", { volume: 0.25 });
     }, 100);
 
-    super.init();
+    super.onInit();
   }
 }

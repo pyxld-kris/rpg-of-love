@@ -17,37 +17,27 @@ class Player {
     const halfWorldWidth = worldWidth / 2;
     const halfWorldHeight = worldHeight / 2;
 
-    this.beginRandomEncounter();
-    scene.input.on("pointerdown", () => {
-      this.beginRandomEncounter();
-    });
+    //this.beginRandomEncounter();
   }
+  travelTo(locationInstance) {
+    try {
+      if (this.currentLocation) this.currentLocation.derender();
+      if (this.currentConversation) this.currentConversation.derender();
+      if (this.npc) this.npc.derender();
 
-  travelTo(locationKey) {
-    if (this.currentLocation) this.currentLocation.destroy();
-    if (this.currentConversation) this.currentConversation.destroy();
-    if (this.npc) this.npc.destroy();
+      let camera = this.scene.cameras.main;
+      camera.fadeOut(1000, 0, 0, 0, () => {
+        this.currentLocation = locationInstance.location;
+        this.currentLocation.render();
 
-    let camera = this.scene.cameras.main;
-    camera.fadeOut(1000, 0, 0, 0, () => {
-      let locationClass = Locations[locationKey];
-      this.currentLocation = new locationClass(this.scene);
-      camera.fadeIn();
-    });
-  }
+        this.npc = locationInstance.inhabitants.getRandomEntry();
+        this.npc.render();
 
-  beginConversationWith(npc) {
-    //this.currentConversation = new Conversation(this.scene, this, npc);
-  }
-
-  beginRandomEncounter() {
-    let locationKeys = Object.keys(Locations);
-    this.travelTo(locationKeys.getRandomEntry());
-
-    let npcArray = Object.values(NPCs);
-    let randomClass = npcArray.getRandomEntry();
-    this.npc = new randomClass(this.scene);
-    //this.beginConversationWith(this.npc);
+        camera.fadeIn();
+      });
+    } catch (e) {
+      console.error(e);
+    }
   }
 
   destroy() {

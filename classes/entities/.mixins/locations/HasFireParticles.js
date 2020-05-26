@@ -8,7 +8,8 @@ class HasFireParticles {
 }
 
 HasFireParticles.methods = {
-  _init() {},
+  // Called when an entity with this mixin is spawned into a visible scene
+  _onRender() {},
 
   initFireParticles(x, y) {
     console.log("init fire particles");
@@ -106,7 +107,7 @@ HasFireParticles.methods = {
 
   // Called when an entity with this component is destroyed
 
-  _destroy() {
+  _onDerender() {
     this.particles.destroy();
   }
 };

@@ -1,7 +1,7 @@
 import { Phaser, Scene } from "phaser";
 
 import genAnims from "../helpers/generateAnimations";
-import Player from "../classes/Player/Player";
+import World from "../classes/entities/world/World";
 
 import monsterImages from "../assets/npcs/monsters";
 
@@ -39,9 +39,9 @@ export default class PlayScene extends Scene {
 
       //this.add.sprite(halfGameWidth, halfGameHeight, "home");
 
-      this.player = new Player(this);
+      this.world = new World(this);
 
-      window.player = this.player; // For console access
+      window.world = this.world; // For console access
     } catch (e) {
       console.error(e);
     }

@@ -18,8 +18,8 @@ class HasDialogText {
 }
 
 HasDialogText.methods = {
-  // Called when an entity with this mixin is created
-  _init() {},
+  // Called when an entity with this mixin is spawned into a visible scene
+  _onRender() {},
 
   // <Setters>
   setDialogText(x, y, width, text) {
@@ -50,7 +50,7 @@ HasDialogText.methods = {
   /** <Hook into phaser and internal events> */
 
   // Called when an entity with this component is updated
-  _update(time, delta) {
+  _onUpdate(time, delta) {
     if (this.doingTextUpdate) {
       if (time - this.lastTextUpdateTime > TEXT_UPDATE_INTERVAL) {
         let nextChar = this.text.charAt(this.currentText.length);
@@ -68,7 +68,7 @@ HasDialogText.methods = {
   },
 
   // Called when an entity with this component is destroyed
-  _destroy() {
+  _onDerender() {
     if (this.dialogText) this.dialogText.destroy();
   }
 

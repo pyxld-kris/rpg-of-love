@@ -12,8 +12,8 @@ class HasAge {
 }
 
 HasAge.methods = {
-  // Called when an entity with this mixin is created
-  _init() {},
+  // Called when an entity with this mixin is spawned into a visible scene
+  _onRender() {},
 
   // <Getters>
   getAge() {
@@ -28,7 +28,7 @@ HasAge.methods = {
   // </Setters>
 
   populateAge(min = 5, max = 50) {
-    this.setAge(min + parseInt(Math.random() * max));
+    this.setAge(min + parseInt(Math.random() * (max - min)));
   }
 };
 

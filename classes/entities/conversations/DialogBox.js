@@ -1,11 +1,12 @@
 import Phaser from "phaser";
-import VisibleEntity from "../VisibleEntity.js";
+import Entity from "../Entity.js";
 
 import Mixins from "../.mixins";
 
-export default class DialogBox extends VisibleEntity {
+export default class DialogBox extends Entity {
   constructor(scene, title, text) {
     const MIXINS = [
+      Mixins.IsRenderable,
       Mixins.IsAttachedToCamera,
       Mixins.HasDialogBackground,
       Mixins.HasDialogText,
@@ -20,7 +21,7 @@ export default class DialogBox extends VisibleEntity {
   }
 
   // Fires after all mixins attached to this entity have been initialized
-  init() {
+  onRender() {
     const gameWidth = this.scene.game.config.width;
     const gameHeight = this.scene.game.config.height;
 

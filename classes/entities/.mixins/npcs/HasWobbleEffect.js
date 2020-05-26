@@ -13,8 +13,8 @@ class HasWobbleEffect {
 }
 
 HasWobbleEffect.methods = {
-  // Called when an entity with this mixin is created
-  _init() {
+  // Called when an entity with this mixin is spawned into a visible scene
+  _onRender() {
     this.wobbleInterval = setInterval(() => {
       this.wobbleTween = this.scene.tweens.add({
         targets: [this],
@@ -28,7 +28,7 @@ HasWobbleEffect.methods = {
     }, 1500);
   },
 
-  _destroy() {
+  _onDerender() {
     clearInterval(this.wobbleInterval);
   }
 };

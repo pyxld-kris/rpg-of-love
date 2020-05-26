@@ -10,7 +10,7 @@ export default class Slime extends NPC {
   }
 
   // Fires after all mixins attached to this entity have been initialized
-  init() {
+  onInit() {
     this.setRole("Slime");
     this.assignRandomGender(["male", "female"]);
 
@@ -18,6 +18,6 @@ export default class Slime extends NPC {
       this.scene.sound.play("slime", { volume: 0.25 });
     }, 500);
 
-    super.init();
+    super.onInit();
   }
 }

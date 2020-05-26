@@ -1,3 +1,7 @@
+// Common
+import IsRenderable from "./common/IsRenderable";
+import IsPhysical from "./common/IsPhysical";
+
 // UI
 import HasDialogBackground from "./ui/HasDialogBackground";
 import HasDialogText from "./ui/HasDialogText";
@@ -20,6 +24,10 @@ import CanSpeak from "./npcs/CanSpeak";
 import HasWobbleEffect from "./npcs/HasWobbleEffect";
 
 export default {
+  // Common
+  IsRenderable,
+  IsPhysical,
+
   // UI
   HasDialogBackground,
   HasDialogText,

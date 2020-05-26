@@ -10,10 +10,10 @@ export default class Goblin extends NPC {
   }
 
   // Fires after all mixins attached to this entity have been initialized
-  init() {
+  onInit() {
     this.setRole("Goblin");
     this.assignRandomGender(["male", "female"]);
 
-    super.init();
+    super.onInit();
   }
 }

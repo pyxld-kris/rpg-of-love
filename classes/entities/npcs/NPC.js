@@ -1,10 +1,12 @@
 import Phaser from "phaser";
-import VisibleEntity from "../VisibleEntity.js";
+import Entity from "../Entity.js";
 import Mixins from "../.mixins";
 
-export default class NPC extends VisibleEntity {
+export default class NPC extends Entity {
   constructor(extraMixins, scene, imageKey) {
     const MIXINS = [
+      Mixins.IsRenderable,
+
       Mixins.HasAge,
       Mixins.HasSkills,
       Mixins.HasRole,
@@ -35,10 +37,8 @@ export default class NPC extends VisibleEntity {
       else if (randNum < 0.75) this.farView();
       else this.zoomView();
     }, 2500);
-  }
 
-  // Fires after all mixins attached to this entity have been initialized
-  init() {
+    // Mixin data population stuff (moved from init)
     if (!this.age) this.populateAge();
     console.log(this.getAge());
 
@@ -49,14 +49,22 @@ export default class NPC extends VisibleEntity {
       console.error(e);
     }
 
-    this.doAppearEffect();
-
     this.assignRandomName();
+  }
 
+  // Fires after all mixins attached to this entity have been fully initialized
+  onInit() {}
+
+  onRender() {
+    this.doAppearEffect(() => {
+      this.normalView();
+    });
     this.beginConversation();
   }
 
-  doAppearEffect() {
+  // Fires when this entity is spawned
+
+  doAppearEffect(onComplete) {
     this.appearanceTween = this.scene.tweens.add({
       targets: [this],
       scaleX: 2,
@@ -66,7 +74,7 @@ export default class NPC extends VisibleEntity {
       //loop: -1,
       //loopDelay: 1500,
       yoyo: false,
-      onComplete: () => {}
+      onComplete: onComplete
     });
   }
 
@@ -89,8 +97,11 @@ export default class NPC extends VisibleEntity {
     let message = this.dialogOptions.getRandomEntry();
   }
 
-  destroy() {
+  onDerender() {
     clearInterval(this.animInterval);
+  }
+  destroy() {
+    this.onDerender();
     super.destroy();
   }
 }

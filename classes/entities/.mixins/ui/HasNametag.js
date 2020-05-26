@@ -13,8 +13,8 @@ class HasNametag {
 }
 
 HasNametag.methods = {
-  // Called when an entity with this mixin is created
-  _init() {},
+  // Called when an entity with this mixin is spawned into a visible scene
+  _onRender() {},
 
   // <Setters>
   setNametagBackground(x, y, width, height, color, alpha) {
@@ -63,7 +63,7 @@ HasNametag.methods = {
   },
 
   // Called when an entity with this component is destroyed
-  _destroy() {
+  _onDerender() {
     if (this.nametagBackground) this.nametagBackground.destroy();
     if (this.nametagText) this.nametagText.destroy();
   }

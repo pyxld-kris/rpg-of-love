@@ -12,8 +12,8 @@ class HasRole {
 }
 
 HasRole.methods = {
-  // Called when an entity with this mixin is created
-  _init() {},
+  // Called when an entity with this mixin is spawned into a visible scene
+  _onRender() {},
 
   // <Getters>
   getRole() {

@@ -10,7 +10,7 @@ export default class Demon extends NPC {
   }
 
   // Fires after all mixins attached to this entity have been initialized
-  init() {
+  onInit() {
     this.setRole("Demon");
     this.assignRandomGender(["male"]);
 
@@ -18,6 +18,6 @@ export default class Demon extends NPC {
       this.scene.sound.play("demon", { volume: 0.25 });
     }, 500);
 
-    super.init();
+    super.onInit();
   }
 }

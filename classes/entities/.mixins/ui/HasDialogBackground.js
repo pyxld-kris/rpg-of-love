@@ -12,8 +12,8 @@ class HasDialogBackground {
 }
 
 HasDialogBackground.methods = {
-  // Called when an entity with this mixin is created
-  _init() {},
+  // Called when an entity with this mixin is spawned into a visible scene
+  _onRender() {},
 
   // <Setters>
   setDialogBackground(x, y, width, height, color, alpha) {
@@ -32,10 +32,10 @@ HasDialogBackground.methods = {
   /** <Hook into phaser and internal events> */
 
   // Called when an entity with this component is updated
-  _update(time, delta) {},
+  _onUpdate(time, delta) {},
 
   // Called when an entity with this component is destroyed
-  _destroy() {
+  _onDerender() {
     if (this.dialogBackground) this.dialogBackground.destroy();
   }
 
