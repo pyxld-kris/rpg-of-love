@@ -1,6 +1,7 @@
 // Common
 import IsRenderable from "./common/IsRenderable";
 import IsPhysical from "./common/IsPhysical";
+import HasLabel from "./common/HasLabel";
 
 // UI
 import HasDialogBackground from "./ui/HasDialogBackground";
@@ -12,6 +13,7 @@ import IsInFront from "./ui/IsInFront";
 // Locations
 import FillsEntireScreen from "./locations/FillsEntireScreen";
 import HasFireParticles from "./locations/HasFireParticles";
+import HasInhabitants from "./locations/HasInhabitants";
 import IsInBack from "./locations/IsInBack";
 
 // NPCs
@@ -27,6 +29,7 @@ export default {
   // Common
   IsRenderable,
   IsPhysical,
+  HasLabel,
 
   // UI
   HasDialogBackground,
@@ -38,6 +41,7 @@ export default {
   // Locations
   FillsEntireScreen,
   HasFireParticles,
+  HasInhabitants,
   IsInBack,
 
   // NPCs

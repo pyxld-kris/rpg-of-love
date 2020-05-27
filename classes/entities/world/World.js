@@ -11,10 +11,6 @@ export default class World extends Entity {
   constructor(scene) {
     const MIXINS = [];
     super([...MIXINS], scene);
-
-    scene.input.on("pointerdown", () => {
-      this.player.travelTo(this.getRandomLocationInstance());
-    });
   }
 
   // Fires after all mixins attached to this entity have been initialized
@@ -29,22 +25,19 @@ export default class World extends Entity {
     let npcClasses = Object.values(NPCs);
 
     // Generate 5 random locations with a different NPC in each
-    this.locationInstances = [];
+    this.locations = [];
     for (let i = 0; i < locationClasses.length; i++) {
       let locationClass = locationClasses[i];
       let thisLocation = new locationClass(this.scene);
 
-      // Initialize new empty location instance (no inhabitants)
-      this.locationInstances.push({
-        location: thisLocation,
-        inhabitants: []
-      });
+      // Initialize new empty location instance
+      this.locations.push(thisLocation);
 
       let numInhabitants = 2 + parseInt(Math.random() * 3);
       for (let j = 0; j < numInhabitants; j++) {
         let npcClass = npcClasses.getRandomEntry();
         let thisNpc = new npcClass(this.scene);
-        this.locationInstances[i].inhabitants.push(thisNpc);
+        this.locations[i].addInhabitant(thisNpc);
 
         npcClasses.splice(npcClasses.indexOf(npcClass), 1);
       }
@@ -52,7 +45,7 @@ export default class World extends Entity {
   }
 
   getRandomLocationInstance() {
-    return this.locationInstances.getRandomEntry();
+    return this.locations.getRandomEntry();
   }
 
   beginRandomEncounter() {

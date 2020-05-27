@@ -7,6 +7,8 @@ export default class TavernLocation extends Location {
     const MIXINS = [];
 
     super(MIXINS, scene, 0, 0, "tavern");
+
+    this.setLabel("The Tavern");
   }
 
   // Fires after all mixins attached to this entity have been initialized

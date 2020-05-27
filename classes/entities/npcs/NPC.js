@@ -31,23 +31,11 @@ export default class NPC extends Entity {
       "I'm going to tell you a story. It begins like all stories, in the beginning. As the story progresses, it then has some other parts like a middle and an end."
     ];
 
-    this.animInterval = setInterval(() => {
-      let randNum = Math.random();
-      if (randNum < 0.65) this.normalView();
-      else if (randNum < 0.75) this.farView();
-      else this.zoomView();
-    }, 2500);
-
     // Mixin data population stuff (moved from init)
-    if (!this.age) this.populateAge();
+    this.populateAge();
     console.log(this.getAge());
-
-    try {
-      this.populateSkills();
-      console.log(this.getSkillString());
-    } catch (e) {
-      console.error(e);
-    }
+    this.populateSkills();
+    console.log(this.getSkillString());
 
     this.assignRandomName();
   }
@@ -55,14 +43,24 @@ export default class NPC extends Entity {
   // Fires after all mixins attached to this entity have been fully initialized
   onInit() {}
 
+  // Fires when this entity is first rendered (after all attached mixins have fired _onRender)
   onRender() {
-    this.doAppearEffect(() => {
-      this.normalView();
-    });
+    this.normalView();
+    this.setScale(0);
+    this.doAppearEffect();
     this.beginConversation();
-  }
 
-  // Fires when this entity is spawned
+    this.animInterval = setInterval(() => {
+      let randNum = Math.random();
+      if (randNum < 0.65) this.normalView();
+      else if (randNum < 0.75) this.farView();
+      else this.zoomView();
+    }, 2500);
+  }
+  // Fires when this entity is derendered (after all attached mixins have fired _onDerender)
+  onDerender() {
+    clearInterval(this.animInterval);
+  }
 
   doAppearEffect(onComplete) {
     this.appearanceTween = this.scene.tweens.add({
@@ -97,9 +95,6 @@ export default class NPC extends Entity {
     let message = this.dialogOptions.getRandomEntry();
   }
 
-  onDerender() {
-    clearInterval(this.animInterval);
-  }
   destroy() {
     this.onDerender();
     super.destroy();

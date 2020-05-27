@@ -7,6 +7,8 @@ export default class MineLocation extends Location {
     const MIXINS = [Mixins.HasFireParticles];
 
     super(MIXINS, scene, 0, 0, "mine");
+
+    this.setLabel("The Mines");
   }
 
   // Fires after all mixins attached to this entity have been initialized

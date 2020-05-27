@@ -5,6 +5,7 @@ import Phaser from "phaser";
 import Locations from "../entities/world/locations";
 import NPCs from "../entities/npcs";
 import Conversation from "../entities/conversations/Conversation";
+import DialogBox from "../entities/conversations/DialogBox";
 
 class Player {
   constructor(scene) {
@@ -19,21 +20,66 @@ class Player {
 
     //this.beginRandomEncounter();
   }
-  travelTo(locationInstance) {
+  travelTo(destination) {
     try {
       if (this.currentLocation) this.currentLocation.derender();
       if (this.currentConversation) this.currentConversation.derender();
       if (this.npc) this.npc.derender();
 
+      this.beginJourney(destination);
+    } catch (e) {
+      console.error(e);
+    }
+  }
+
+  beginJourney(destination) {
+    let camera = this.scene.cameras.main;
+    //camera.fadeOut(1000, 0, 0, 0, () => {
+    this.scene.input.off("pointerdown");
+
+    this.travelingBackground = this.scene.add
+      .rectangle(
+        0,
+        0,
+        this.scene.game.config.width,
+        this.scene.game.config.height,
+        0x000000
+      )
+      .setOrigin(0, 0);
+
+    this.travelingDialogBox = new DialogBox(
+      this.scene,
+      null,
+      "You make your way to " + destination.getLabel()
+    );
+    this.travelingDialogBox.render();
+
+    //camera.fadeIn();
+
+    this.scene.input.on("pointerdown", () => {
+      this.travelingBackground.destroy();
+      this.travelingDialogBox.destroy();
+      this.arriveAt(destination);
+    });
+    //});
+  }
+
+  arriveAt(destination) {
+    try {
+      this.scene.input.off("pointerdown");
+
       let camera = this.scene.cameras.main;
-      camera.fadeOut(1000, 0, 0, 0, () => {
-        this.currentLocation = locationInstance.location;
-        this.currentLocation.render();
 
-        this.npc = locationInstance.inhabitants.getRandomEntry();
-        this.npc.render();
+      this.currentLocation = destination;
+      this.currentLocation.render();
 
-        camera.fadeIn();
+      this.npc = destination.getInhabitants().getRandomEntry();
+      this.npc.render();
+
+      //camera.fadeIn();
+
+      this.scene.input.on("pointerdown", () => {
+        this.travelTo(this.scene.world.getRandomLocationInstance());
       });
     } catch (e) {
       console.error(e);

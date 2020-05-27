@@ -6,6 +6,8 @@ export default class Location extends Entity {
   constructor(extraMixins, scene, x, y, imageKey) {
     const MIXINS = [
       Mixins.IsRenderable,
+      Mixins.HasInhabitants,
+      Mixins.HasLabel,
       Mixins.FillsEntireScreen,
       Mixins.IsInBack,
       ...extraMixins

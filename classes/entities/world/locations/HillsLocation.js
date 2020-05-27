@@ -7,6 +7,8 @@ export default class HillsLocation extends Location {
     const MIXINS = [];
 
     super(MIXINS, scene, 0, 0, "hills");
+
+    this.setLabel("The Hills");
   }
 
   // Fires after all mixins attached to this entity have been initialized

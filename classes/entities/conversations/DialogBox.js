@@ -44,7 +44,7 @@ export default class DialogBox extends Entity {
     );
 
     try {
-      this.createNametag(2, 48, 120, 7, this.title);
+      if (this.title) this.createNametag(2, 48, 120, 7, this.title);
     } catch (e) {
       console.error(e);
     }

@@ -36,6 +36,7 @@ IsRenderable.methods = {
   derender() {
     this.setActive(false).setVisible(false);
     this.fireMixinEvents("_onDerender");
+    if (this.onDerender) this.onDerender();
   },
 
   _onDestroy() {}

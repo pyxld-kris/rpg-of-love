@@ -7,6 +7,8 @@ export default class HomeLocation extends Location {
     const MIXINS = [];
 
     super(MIXINS, scene, 0, 0, "home");
+
+    this.setLabel("Your Home");
   }
 
   // Fires after all mixins attached to this entity have been initialized
