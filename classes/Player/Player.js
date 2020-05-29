@@ -37,6 +37,7 @@ class Player {
     //camera.fadeOut(1000, 0, 0, 0, () => {
     this.scene.input.off("pointerdown");
 
+    /*
     this.travelingBackground = this.scene.add
       .rectangle(
         0,
@@ -46,6 +47,8 @@ class Player {
         0x000000
       )
       .setOrigin(0, 0);
+*/
+    this.scene.world.map.render();
 
     this.travelingDialogBox = new DialogBox(
       this.scene,
@@ -57,7 +60,7 @@ class Player {
     //camera.fadeIn();
 
     this.scene.input.on("pointerdown", () => {
-      this.travelingBackground.destroy();
+      //this.travelingBackground.destroy();
       this.travelingDialogBox.destroy();
       this.arriveAt(destination);
     });
@@ -67,6 +70,7 @@ class Player {
   arriveAt(destination) {
     try {
       this.scene.input.off("pointerdown");
+      this.scene.world.map.derender();
 
       let camera = this.scene.cameras.main;
 

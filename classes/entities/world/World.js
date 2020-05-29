@@ -7,6 +7,8 @@ import Locations from "./locations";
 import NPCs from "../npcs";
 import PlayScene from "../../../scenes/PlayScene.js";
 
+import Map from "./Map.js";
+
 export default class World extends Entity {
   constructor(scene) {
     const MIXINS = [];
@@ -15,6 +17,8 @@ export default class World extends Entity {
 
   // Fires after all mixins attached to this entity have been initialized
   onInit() {
+    this.map = new Map(this.scene);
+
     this.player = new Player(this.scene);
     this.generateWorld();
     this.player.travelTo(this.getRandomLocationInstance());
